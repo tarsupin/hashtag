@@ -68,8 +68,8 @@
 
 
 /* Responsive Images */
-.post-image { width:100%; }
-.post-image-mini { max-width:100%; }
+.post-image { width:100%; max-height:170px; }
+.post-image-mini { max-width:100%; max-height:170px; }
 
 /* Fluid Video Container, thanks to "AvexDesigns.com/responsive-youtube-embed/" */
 .video-embed-flex {

@@ -166,8 +166,8 @@ abstract class AppHashtag {
 				
 				echo '
 				<div class="main-block">
-					<div class="block-date">' . Time::fuzzy($submission['date_posted']) . '</div><span class="icon-image"></span> By <a href="' . $social . '/' . $submission['handle'] . '">' . $submission['display_name'] . '</a>
-					<div style="float:left; width:45%; margin-right:20px;">';
+					<div class="block-date">' . Time::fuzzy($submission['date_posted']) . '</div>
+					<div style="float:left; width:30%; text-align:center;">';
 					
 					if($submission['asset_url'])
 					{
@@ -176,7 +176,9 @@ abstract class AppHashtag {
 					
 					echo '
 					</div>
-					<div style="margin-top:22px;">';
+					<div style="margin-left:31%;">
+						<span class="icon-image"></span> By <a href="' . $social . '/' . $submission['handle'] . '">' . $submission['display_name'] . '</a>
+						<div style="margin-top:14px;">';
 				
 				// Display the title, if provided
 				if($submission['title'] != '')
@@ -191,7 +193,8 @@ abstract class AppHashtag {
 				}
 				
 				echo '
-					<p style="margin-bottom:0px;"><a href="' . $submission['source_url'] . '">... Read Full Article</a></p>
+						<p style="margin-bottom:0px;"><a href="' . $submission['source_url'] . '">... Read Full Article</a></p>
+						</div>
 					</div>
 				</div>';
 			}
