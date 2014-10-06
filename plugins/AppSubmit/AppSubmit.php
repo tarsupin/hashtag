@@ -47,7 +47,7 @@ abstract class AppSubmit {
 			{
 				$hashtagIDs[] = $hashtagID;
 				
-				$pass = Database::query("INSERT INTO hashtag_posts (hashtag_id, type,date_posted, attachment_id) VALUES (?, ?, ?, ?, ?)", array($hashtagID, $type, $timestamp, $attachmentID));
+				$pass = Database::query("INSERT INTO hashtag_posts (hashtag_id, type, date_posted, attachment_id) VALUES (?, ?, ?, ?)", array($hashtagID, $type, $timestamp, $attachmentID));
 			}
 		}
 		
