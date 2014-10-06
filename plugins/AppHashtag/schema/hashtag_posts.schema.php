@@ -39,7 +39,6 @@ class hashtag_posts_schema {
 		(
 			`hashtag_id`			int(10)			unsigned	NOT NULL	DEFAULT '0',
 			`type`					tinyint(1)		unsigned	NOT NULL	DEFAULT '0',
-			`message`				varchar(255)				NOT NULL	DEFAULT '',
 			
 			`date_posted`			int(10)			unsigned	NOT NULL	DEFAULT '0',
 			
@@ -66,7 +65,6 @@ class hashtag_posts_schema {
 		
 		$define->set("hashtag_id")->title("Hashtag ID")->description("The ID of the hashtag the posts are in.")->isUnique()->isReadonly();
 		$define->set("type")->description("The type of post.");
-		$define->set("message")->description("The message for the post.");
 		$define->set("date_posted")->description("The timestamp of when this post was created.")->fieldType("timestamp");
 		$define->set("attachment_id")->title("Attachment ID")->description("The ID of the attachment related to this post.");
 		
@@ -95,7 +93,7 @@ class hashtag_posts_schema {
 		switch($name)
 		{
 			case "view":
-				$schema->addFields("hashtag_id", "type", "message", "attachment_id", "date_posted");
+				$schema->addFields("hashtag_id", "type", "attachment_id", "date_posted");
 				$schema->sort("hashtag_id");
 				$schema->sort("type");
 				break;

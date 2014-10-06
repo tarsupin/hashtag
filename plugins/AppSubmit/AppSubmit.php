@@ -29,11 +29,10 @@ abstract class AppSubmit {
 	,	$type					// <int> The type of submission.
 	,	$attachmentID			// <int> The attachment ID for this hashtag post.
 	,	$hashtags				// <int:str> An array of hashtags that were listed for the submission.
-	,	$message				// <str> The message to append to this submission.
 	,	$resubmission = false	// <bool> TRUE means this is a resubmission - it's just adding additional hashtags.
 	)							// RETURNS <bool> TRUE on success, FALSE on failure.
 	
-	// AppSubmit::run($uniID, $type, $attachmentID, $hashtags, $message, [$resubmission]);
+	// AppSubmit::run($uniID, $type, $attachmentID, $hashtags, [$resubmission]);
 	{
 		// Prepare Values
 		$timestamp = time();
@@ -48,7 +47,7 @@ abstract class AppSubmit {
 			{
 				$hashtagIDs[] = $hashtagID;
 				
-				$pass = Database::query("INSERT INTO hashtag_posts (hashtag_id, type, message, date_posted, attachment_id) VALUES (?, ?, ?, ?, ?)", array($hashtagID, $type, $message, $timestamp, $attachmentID));
+				$pass = Database::query("INSERT INTO hashtag_posts (hashtag_id, type,date_posted, attachment_id) VALUES (?, ?, ?, ?, ?)", array($hashtagID, $type, $timestamp, $attachmentID));
 			}
 		}
 		

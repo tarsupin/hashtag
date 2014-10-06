@@ -58,7 +58,7 @@ abstract class AppHashtag {
 		array_unshift($sqlArray, $hashtagID);
 		
 		// Retrieve the hashtags
-		if($posts = Database::selectMultiple("SELECT p.type, p.message, p.date_posted, a.title, a.description, a.asset_url, a.source_url, a.params, a.uni_id, u.handle, u.display_name FROM hashtag_posts p INNER JOIN attachment a ON a.id=p.attachment_id INNER JOIN users u ON u.uni_id=a.uni_id WHERE p.hashtag_id=? AND " . $sqlWhere . " ORDER BY p.date_posted DESC LIMIT " . $start . ', ' . $showNum, $sqlArray))
+		if($posts = Database::selectMultiple("SELECT p.type, p.date_posted, a.title, a.description, a.asset_url, a.source_url, a.params, a.uni_id, u.handle, u.display_name FROM hashtag_posts p INNER JOIN attachment a ON a.id=p.attachment_id INNER JOIN users u ON u.uni_id=a.uni_id WHERE p.hashtag_id=? AND " . $sqlWhere . " ORDER BY p.date_posted DESC LIMIT " . $start . ', ' . $showNum, $sqlArray))
 		{
 			return $posts;
 		}
@@ -151,8 +151,8 @@ abstract class AppHashtag {
 					<div class="status-right">
 						<div class="block-date">' . Time::fuzzy($submission['date_posted']) . '</div>
 						<div><a href="' . $social . '/' . $submission['handle'] . '"><span class="h4">' . $submission['display_name'] . '</span></a> <a href="' . $fastchat . '/' . $submission['handle'] . '"><span class="com-handle">@' . $submission['handle'] . '</span></a></div>
-						<p>' . Comment::showSyntax($submission['message']) . '</p>
-						<div class="extralinks"><a href="' . $submission['source_url'] . '">Link to Comment</a> <a href="' . Button::chatComment($submission['message'], '', $submission['handle']) . '"><span class="icon-comment"></span> Chat</a></div>
+						<p>' . Comment::showSyntax($submission['description']) . '</p>
+						<div class="extralinks"><a href="' . $submission['source_url'] . '">Link to Comment</a></div>
 					</div>
 				</div>';
 			}
@@ -213,16 +213,16 @@ abstract class AppHashtag {
 					</div>
 					<div>' . ($submission['source_url'] != "" ? '<a href="' . $submission['source_url'] . '">' : '') . Photo::responsive($submission['asset_url'], $mobileURL, 450, "", 450, $class) . ($submission['source_url'] != '' ? '</a>' : '') . '</div>
 					<div class="photo-com">
-						<div class="photo-linkbar"><div class="extralinks"><a href="' . $submission['source_url'] . '">Link to Source</a> <a href="' . Button::shareImage($submission['asset_url'], $mobileURL, $submission['description'], $submission['title'], $submission['source_url']) . '"><span class="icon-document"></span> Share</a> <a href="' . Button::chatImage($submission['asset_url'], $mobileURL, $submission['description'], $submission['title'], $submission['source_url'], $submission['handle']) . '"><span class="icon-comment"></span> Chat</a></div></div>';
+						<div class="photo-linkbar"><div class="extralinks"><a href="' . $submission['source_url'] . '">Link to Source</a> <span class="icon-comment"></span> Chat</a></div></div>';
 				
 				// Show the message if there is one
-				if($submission['message'])
+				if($submission['description'])
 				{
 					echo '
 						<div class="status-left"><a href="' . $social . '/' . $submission['handle'] . '"><img class="circimg" src="' . ProfilePic::image(1, "medium") . '" /></a></div>
 						<div class="status-right">
 							<div><a href="' . $social . '/' . $submission['handle'] . '"><span class="h4">' . $submission['display_name'] . '</span></a> <a href="' . $fastchat . '/' . $submission['handle'] . '"><span class="com-handle">@' . $submission['handle'] . '</span></a></div>
-							<p>' . Comment::showSyntax($submission['message']) . '</p>
+							<p>' . Comment::showSyntax($submission['description']) . '</p>
 						</div>';
 				}
 				
@@ -242,16 +242,16 @@ abstract class AppHashtag {
 					</div>
 					' . $details['embed'] . '
 					<div class="photo-com">
-						<div class="photo-linkbar"><div class="extralinks"><a href="' . $submission['source_url'] . '">Link to Source</a> <a href="' . Button::shareVideo($submission['asset_url'], $submission['description'], $submission['title'], $submission['source_url']) . '"><span class="icon-video"></span> Share</a> <a href="' . Button::chatVideo($submission['asset_url'], $submission['description'], $submission['title'], $submission['source_url'], $submission['handle']) . '"><span class="icon-comment"></span> Chat</a></div></div>';
+						<div class="photo-linkbar"><div class="extralinks"><a href="' . $submission['source_url'] . '">Link to Source</a></div></div>';
 				
 				// Show the message if there is one
-				if($submission['message'])
+				if($submission['description'])
 				{
 					echo '
 						<div class="status-left"><a href="' . $social . '/' . $submission['handle'] . '"><img class="circimg" src="' . ProfilePic::image(1, "medium") . '" /></a></div>
 						<div class="status-right">
 							<div><a href="' . $social . '/' . $submission['handle'] . '"><span class="h4">' . $submission['display_name'] . '</span></a> <a href="' . $fastchat . '/' . $submission['handle'] . '"><span class="com-handle">@' . $submission['handle'] . '</span></a></div>
-							<p>' . Comment::showSyntax($submission['message']) . '</p>
+							<p>' . Comment::showSyntax($submission['description']) . '</p>
 						</div>';
 				}
 				
