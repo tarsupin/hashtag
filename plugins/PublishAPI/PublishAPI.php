@@ -131,7 +131,7 @@ class PublishAPI extends API {
 			$attachment->save();
 			
 			// Create the hashtag post
-			return AppSubmit::run($this->data['uni_id'], $attachType, $attachment->id, $hashtags, $description);
+			return AppSubmit::run($uniID, $attachType, $attachment->id, $hashtags);
 		}
 		
 		// If we're publishing a Video
@@ -162,7 +162,7 @@ class PublishAPI extends API {
 			$attachment->save();
 			
 			// Create the hashtag post
-			return AppSubmit::run($this->data['uni_id'], $attachType, $attachment->id, $hashtags, $description);
+			return AppSubmit::run($uniID, $attachType, $attachment->id, $hashtags);
 		}
 		
 		// If we're publishing a comment
@@ -182,7 +182,7 @@ class PublishAPI extends API {
 			$attachment->save();
 			
 			// Create the hashtag post
-			return AppSubmit::run($this->data['uni_id'], $attachType, $attachment->id, $hashtags, $description);
+			return AppSubmit::run($uniID, $attachType, $attachment->id, $hashtags);
 		}
 		
 		return false;
@@ -225,7 +225,7 @@ class PublishAPI extends API {
 		if($attachment = Attachment::get($attachmentID))
 		{
 			// Resubmit to the appropriate hashtags
-			return AppSubmit::run($this->data['uni_id'], $attachment['type'], $attachmentID, $hashtags, true);
+			return AppSubmit::run((int) $this->data['uni_id'], $attachment['type'], $attachmentID, $hashtags, true);
 		}
 		
 		return false;

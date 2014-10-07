@@ -122,8 +122,177 @@ abstract class AppHashtag {
 	}
 	
 	
-/****** Output a list of hashtag submissions ******/
+/****** Prepare a Display Feed Page ******/
+	public static function prepare (
+	)					// RETURNS <void>
+	
+	// AppHashtag::prepare();
+	{
+		Photo::prepareResponsivePage();
+		
+		Metadata::addHeader('<link rel="stylesheet" href="' . CDN . '/css/content-system.css" /><script src="' . CDN . '/scripts/content-system.js"></script><script src="' . CDN . '/scripts/autoscroll.js"></script>');
+	}
+	
+	
+/****** Display the list of hashtag submissions ******/
 	public static function display
+	(
+		$submissions	// <int:[str:mixed]> The full submission list to display.
+	)					// RETURNS <void> OUTPUTS the content.
+	
+	// AppHashtag::display($submissions);
+	{
+		// Get Site URL's
+		$socialURL = URL::unifaction_social();
+		$fastchatURL = URL::fastchat_social();
+		
+		foreach($submissions as $submission)
+		{
+			// Recognize Integers
+			$submission['uni_id'] = (int) $submission['uni_id'];
+			$submission['date_posted'] = (int) $submission['date_posted'];
+			
+			// Comments
+			if($submission['type'] == Attachment::TYPE_COMMENT)
+			{
+				echo '
+				<div class="main-block">
+					<div class="status-left"><a href="' . $socialURL . '/' . $submission['handle'] . '"><img class="circimg" src="' . ProfilePic::image($submission['uni_id'], "medium") . '" /></a></div>
+					<div class="status-right">
+						<div class="block-date">' . Time::fuzzy($submission['date_posted']) . '</div>
+						<div><a href="' . $socialURL . '/' . $submission['handle'] . '"><span class="h4">' . $submission['display_name'] . '</span></a> <a href="' . $fastchatURL . '/' . $submission['handle'] . '"><span class="com-handle">@' . $submission['handle'] . '</span></a></div>
+						<p>' . Comment::showSyntax($submission['description']) . '</p>
+						<div class="extralinks"><a href="' . $submission['source_url'] . '">Link to Comment</a></div>
+					</div>
+				</div>';
+			}
+			
+			// Articles and Blogs
+			else if($submission['type'] == Attachment::TYPE_ARTICLE or $submission['type'] == Attachment::TYPE_BLOG)
+			{
+				// Display the Content
+				echo '
+				<div class="c-feed-wrap">
+					<div class="c-feed-left">
+						<a href="' . $submission['source_url'] . '">' . Photo::responsive($submission['asset_url'], "", 950, "", 950, "c-feed-img") . '</a>
+					</div>
+					<div class="c-feed-right">
+						<div class="c-feed-date feed-desktop">' . date("m/j/y", $submission['date_posted']) . '</div>
+						<div class="c-feed-title"><a href="' . $submission['source_url'] . '">' . $submission['title'] . '</a></div>';
+				
+				if($submission['handle'])
+				{
+					echo '
+						<div class="c-feed-author feed-desktop">Written by <a href="' . $socialURL . '/' . $submission['handle'] . '">' . $submission['display_name'] . '</a> (<a href="' . $fastchatURL . '/' . $submission['handle'] . '">@' . $submission['handle'] . '</a>)</div>';
+				}
+				
+				echo '
+						<div class="c-feed-body">' . $submission['description'] . '</div>
+					</div>
+				</div>';
+				
+				/*
+				echo '
+				<div class="main-block">
+					<div class="block-date">' . Time::fuzzy($submission['date_posted']) . '</div>
+					<div style="float:left; width:30%; text-align:center;">';
+					
+					if($submission['asset_url'])
+					{
+						echo ($submission['source_url'] ? '<a href="' . $submission['source_url'] . '">' : '') . '<img src="' . $submission['asset_url'] . '" />' . ($submission['source_url'] != '' ? '</a>' : '');
+					}
+					
+					echo '
+					</div>
+					<div style="margin-left:31%;">
+						<span class="icon-image"></span> By <a href="' . $socialURL . '/' . $submission['handle'] . '">' . $submission['display_name'] . '</a>
+						<div style="margin-top:14px;">';
+				
+				// Display the title, if provided
+				if($submission['title'] != '')
+				{
+					echo '<div><strong>' . $submission['title'] . '</strong></div>';
+				}
+				
+				// Display the description, if provided
+				if($submission['description'] != '')
+				{
+					echo '<div>' . $submission['description'] . '</div>';
+				}
+				
+				echo '
+						<p style="margin-bottom:0px;"><a href="' . $submission['source_url'] . '">... Read Full Article</a></p>
+						</div>
+					</div>
+				</div>';
+				*/
+			}
+			
+			// Images
+			else if($submission['type'] == Attachment::TYPE_IMAGE)
+			{
+				echo '
+				<div class="photo-block">
+					<div class="photo-upperbar">
+						<div class="block-date">' . Time::fuzzy($submission['date_posted']) . '</div>
+						<span class="icon-image"></span> &nbsp; <a href="' . $socialURL . '/' . $submission['handle'] . '">' . $submission['display_name'] . '</a> posted an image
+					</div>
+					<div>' . ($submission['source_url'] != "" ? '<a href="' . $submission['source_url'] . '">' : '') . '<img src="' . $submission['asset_url'] . '" />' . ($submission['source_url'] != '' ? '</a>' : '') . '</div>
+					<div class="photo-com">
+						<div class="photo-linkbar"><div class="extralinks"><a href="' . $submission['source_url'] . '">Link to Source</a> <span class="icon-comment"></span> Chat</a></div></div>';
+				
+				// Show the message if there is one
+				if($submission['description'])
+				{
+					echo '
+						<div class="status-left"><a href="' . $socialURL . '/' . $submission['handle'] . '"><img class="circimg" src="' . ProfilePic::image(1, "medium") . '" /></a></div>
+						<div class="status-right">
+							<div><a href="' . $socialURL . '/' . $submission['handle'] . '"><span class="h4">' . $submission['display_name'] . '</span></a> <a href="' . $fastchatURL . '/' . $submission['handle'] . '"><span class="com-handle">@' . $submission['handle'] . '</span></a></div>
+							<p>' . Comment::showSyntax($submission['description']) . '</p>
+						</div>';
+				}
+				
+				echo '
+					</div>
+				</div>';
+			}
+			
+			// Videos
+			else if($submission['type'] == Attachment::TYPE_VIDEO)
+			{
+				$details = json_decode($submission['params'], true);
+				
+				echo '
+				<div class="photo-block">
+					<div class="photo-upperbar">
+						<div class="block-date">' . Time::fuzzy($submission['date_posted']) . '</div>
+						<span class="icon-image"></span> &nbsp; <a href="' . $socialURL . '/' . $submission['handle'] . '">' . $submission['display_name'] . '</a> posted a video
+					</div>
+					' . $details['embed'] . '
+					<div class="photo-com">
+						<div class="photo-linkbar"><div class="extralinks"><a href="' . $submission['source_url'] . '">Link to Source</a></div></div>';
+				
+				// Show the message if there is one
+				if($submission['description'])
+				{
+					echo '
+						<div class="status-left"><a href="' . $socialURL . '/' . $submission['handle'] . '"><img class="circimg" src="' . ProfilePic::image(1, "medium") . '" /></a></div>
+						<div class="status-right">
+							<div><a href="' . $socialURL . '/' . $submission['handle'] . '"><span class="h4">' . $submission['display_name'] . '</span></a> <a href="' . $fastchat . '/' . $submission['handle'] . '"><span class="com-handle">@' . $submission['handle'] . '</span></a></div>
+							<p>' . Comment::showSyntax($submission['description']) . '</p>
+						</div>';
+				}
+				
+				echo '
+					</div>
+				</div>';
+			}
+		}
+	}
+	
+	
+/****** Output a list of hashtag submissions ******/
+	public static function display_orig
 	(
 		$submissions	// <int:[str:mixed]> The full submission list to display.
 	)					// RETURNS <void> OUTPUTS the content.

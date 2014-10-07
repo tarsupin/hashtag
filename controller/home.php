@@ -6,8 +6,8 @@ AppTrend::updateTrending();
 // Get trending posts
 $submissions = AppTrend::getTrendPosts();
 
-// Prepare the Metadata
-Metadata::addHeader('<script src="' . CDN . '/scripts/autoscroll.js"></script>');
+// Prepare the Header Data
+AppHashtag::prepare();
 
 // Run Global Script
 require(APP_PATH . "/includes/global.php");

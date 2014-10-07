@@ -50,14 +50,11 @@ WidgetLoader::add("SidePanel", 5, '
 	</ul>
 </div>');
 
-// Prepare the Metadata
-Metadata::addHeader('<script src="' . CDN . '/scripts/autoscroll.js"></script>');
+// Prepare the Header Data
+AppHashtag::prepare();
 
 // Run Global Script
 require(APP_PATH . "/includes/global.php");
-
-// Include Responsive Script
-Photo::prepareResponsivePage();
 
 // Display the Header
 require(SYS_PATH . "/controller/includes/metaheader.php");

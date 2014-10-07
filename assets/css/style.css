@@ -35,6 +35,9 @@
 
 .block-date { float:right; font-size:16px; color:#b2b2b2; }
 
+/* Overwrite the CSS style for Content */
+.c-feed-wrap { padding:8px 8px 8px 11px; border-bottom:solid 1px #c0c0c0; overflow:hidden; }
+
 /* Comments */
 .com-handle { color:rgb(71, 80, 85); }
 
@@ -64,7 +67,6 @@
 .photo-com { padding:16px 16px 16px 22px; overflow:hidden; }
 .photo-linkbar { padding: 0px 0px 18px 0px; }
 .photo-linkbar>.extralinks>a { margin-right:20px; }
-
 
 
 /* Responsive Images */
