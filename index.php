@@ -20,6 +20,14 @@ require(SYS_PATH . "/routes.php");
 // If a page hasn't loaded yet, check if there is a dynamic load
 if($url[0] != '' && $url[0] != "404")
 {
+	// Check for the hashtag
+	$hashtag = Sanitize::variable($url[0]);
+	
+	if(!$hashtagID = AppHashtag::getHashtagID($hashtag))
+	{
+		require(APP_PATH . '/controller/hashtag-empty.php'); exit;
+	}
+	
 	require(APP_PATH . '/controller/hashtag.php'); exit;
 }
 //*/

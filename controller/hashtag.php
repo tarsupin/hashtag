@@ -1,12 +1,7 @@
 <?php if(!defined("CONF_PATH")) { die("No direct script access allowed."); }
 
-// Check for the hashtag
-$hashtag = Sanitize::variable($url[0]);
-
-if(!$hashtagID = AppHashtag::getHashtagID($hashtag))
-{
-	header("Location: /404"); exit;
-}
+// $hashtag
+// $hashtagID
 
 // Check if the user is attempting to follow this value
 if(isset($_GET['follow']))
