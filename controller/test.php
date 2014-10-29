@@ -81,7 +81,7 @@ echo '
 
 .viewport-wrap { max-width:1440px; margin-left:200px; background-color:green; }
 
-#panel-nav { margin-left: 0px; }
+#panel-left { margin-left: 0px; }
 #content { margin-left:260px; }
 
 </style>';
