@@ -24,6 +24,9 @@ WidgetLoader::add("SidePanel", 1, '
 	</div>
 </div>');
 
+// Prepare the Page's Active Hashtag
+$config['active-hashtag'] = $hashtag;
+
 // Run Global Script
 require(APP_PATH . "/includes/global.php");
 

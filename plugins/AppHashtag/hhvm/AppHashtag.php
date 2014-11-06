@@ -130,7 +130,7 @@ abstract class AppHashtag {
 	{
 		Photo::prepareResponsivePage();
 		
-		Metadata::addHeader('<link rel="stylesheet" href="' . CDN . '/css/content-system.css" /><script src="' . CDN . '/scripts/content-system.js"></script><script src="' . CDN . '/scripts/autoscroll.js"></script>');
+		Metadata::addHeader('<link rel="stylesheet" href="' . CDN . '/css/content-system.css" /><script src="' . CDN . '/scripts/content-system.js"></script>');
 	}
 	
 	
