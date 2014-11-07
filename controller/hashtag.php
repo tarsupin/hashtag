@@ -3,6 +3,9 @@
 // $hashtag
 // $hashtagID
 
+// Return if the $hashtag value isn't set
+if(!isset($hashtag)) { header("Location: /"); }
+
 // Check if the user is attempting to follow this value
 if(isset($_GET['follow']))
 {
@@ -40,10 +43,13 @@ WidgetLoader::add("SidePanel", 5, '
 		<li class="nav-slot"><a href="/' . $hashtag . '?refine=' . Attachment::TYPE_ARTICLE . '">Articles <span class="icon-circle-right nav-arrow"></span></a></li>
 		<li class="nav-slot"><a href="/' . $hashtag . '?refine=' . Attachment::TYPE_BLOG . '">Blogs<span class="icon-circle-right nav-arrow"></span></a></li>
 		<li class="nav-slot"><a href="/' . $hashtag . '?refine=' . Attachment::TYPE_COMMENT . '">Comments <span class="icon-circle-right nav-arrow"></span></a></li>
-		<li class="nav-slot"><a href="/' . $hashtag . '?refine=' . Attachment::TYPE_IMAGE . '">Images <span class="icon-circle-right nav-arrow"></span></a></li>
-		<li class="nav-slot"><a href="/' . $hashtag . '?refine=' . Attachment::TYPE_VIDEO . '">Videos <span class="icon-circle-right nav-arrow"></span></a></li>
 	</ul>
 </div>');
+
+/*
+		<li class="nav-slot"><a href="/' . $hashtag . '?refine=' . Attachment::TYPE_IMAGE . '">Images <span class="icon-circle-right nav-arrow"></span></a></li>
+		<li class="nav-slot"><a href="/' . $hashtag . '?refine=' . Attachment::TYPE_VIDEO . '">Videos <span class="icon-circle-right nav-arrow"></span></a></li>
+*/
 
 // Prepare the Header Data
 AppHashtag::prepare();
