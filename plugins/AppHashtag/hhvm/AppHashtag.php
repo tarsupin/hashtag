@@ -144,7 +144,6 @@ abstract class AppHashtag {
 	{
 		// Get Site URL's
 		$socialURL = URL::unifaction_social();
-		$fastchatURL = URL::fastchat_social();
 		
 		foreach($submissions as $submission)
 		{
@@ -160,7 +159,7 @@ abstract class AppHashtag {
 					<div class="status-left"><a href="' . $socialURL . '/' . $submission['handle'] . '"><img class="circimg" src="' . ProfilePic::image($submission['uni_id'], "medium") . '" /></a></div>
 					<div class="status-right">
 						<div class="block-date">' . Time::fuzzy($submission['date_posted']) . '</div>
-						<div><a href="' . $socialURL . '/' . $submission['handle'] . '"><span class="h4">' . $submission['display_name'] . '</span></a> <a href="' . $fastchatURL . '/' . $submission['handle'] . '"><span class="com-handle">@' . $submission['handle'] . '</span></a></div>
+						<div><a href="' . $socialURL . '/' . $submission['handle'] . '"><span class="h4">' . $submission['display_name'] . '</span></a> <a href="' . $socialURL . '/' . $submission['handle'] . '"><span class="com-handle">@' . $submission['handle'] . '</span></a></div>
 						<p>' . Comment::showSyntax($submission['description']) . '</p>
 						<div class="extralinks"><a href="' . $submission['source_url'] . '">Link to Comment</a></div>
 					</div>
@@ -183,7 +182,7 @@ abstract class AppHashtag {
 				if($submission['handle'])
 				{
 					echo '
-						<div class="c-feed-author feed-desktop">Written by <a href="' . $socialURL . '/' . $submission['handle'] . '">' . $submission['display_name'] . '</a> (<a href="' . $fastchatURL . '/' . $submission['handle'] . '">@' . $submission['handle'] . '</a>)</div>';
+						<div class="c-feed-author feed-desktop">Written by <a href="' . $socialURL . '/' . $submission['handle'] . '">' . $submission['display_name'] . '</a> (<a href="' . $socialURL . '/' . $submission['handle'] . '">@' . $submission['handle'] . '</a>)</div>';
 				}
 				
 				echo '
@@ -247,7 +246,7 @@ abstract class AppHashtag {
 					echo '
 						<div class="status-left"><a href="' . $socialURL . '/' . $submission['handle'] . '"><img class="circimg" src="' . ProfilePic::image(1, "medium") . '" /></a></div>
 						<div class="status-right">
-							<div><a href="' . $socialURL . '/' . $submission['handle'] . '"><span class="h4">' . $submission['display_name'] . '</span></a> <a href="' . $fastchatURL . '/' . $submission['handle'] . '"><span class="com-handle">@' . $submission['handle'] . '</span></a></div>
+							<div><a href="' . $socialURL . '/' . $submission['handle'] . '"><span class="h4">' . $submission['display_name'] . '</span></a> <a href="' . $socialURL . '/' . $submission['handle'] . '"><span class="com-handle">@' . $submission['handle'] . '</span></a></div>
 							<p>' . Comment::showSyntax($submission['description']) . '</p>
 						</div>';
 				}
@@ -278,7 +277,7 @@ abstract class AppHashtag {
 					echo '
 						<div class="status-left"><a href="' . $socialURL . '/' . $submission['handle'] . '"><img class="circimg" src="' . ProfilePic::image(1, "medium") . '" /></a></div>
 						<div class="status-right">
-							<div><a href="' . $socialURL . '/' . $submission['handle'] . '"><span class="h4">' . $submission['display_name'] . '</span></a> <a href="' . $fastchat . '/' . $submission['handle'] . '"><span class="com-handle">@' . $submission['handle'] . '</span></a></div>
+							<div><a href="' . $socialURL . '/' . $submission['handle'] . '"><span class="h4">' . $submission['display_name'] . '</span></a> <a href="' . $social . '/' . $submission['handle'] . '"><span class="com-handle">@' . $submission['handle'] . '</span></a></div>
 							<p>' . Comment::showSyntax($submission['description']) . '</p>
 						</div>';
 				}
@@ -301,7 +300,6 @@ abstract class AppHashtag {
 	{
 		// Get Site URL's
 		$social = URL::unifaction_social();
-		$fastchat = URL::fastchat_social();
 		
 		foreach($submissions as $submission)
 		{
@@ -319,7 +317,7 @@ abstract class AppHashtag {
 					<div class="status-left"><a href="' . $social . '/' . $submission['handle'] . '"><img class="circimg" src="' . ProfilePic::image($submission['uni_id'], "medium") . '" /></a></div>
 					<div class="status-right">
 						<div class="block-date">' . Time::fuzzy($submission['date_posted']) . '</div>
-						<div><a href="' . $social . '/' . $submission['handle'] . '"><span class="h4">' . $submission['display_name'] . '</span></a> <a href="' . $fastchat . '/' . $submission['handle'] . '"><span class="com-handle">@' . $submission['handle'] . '</span></a></div>
+						<div><a href="' . $social . '/' . $submission['handle'] . '"><span class="h4">' . $submission['display_name'] . '</span></a> <a href="' . $social . '/' . $submission['handle'] . '"><span class="com-handle">@' . $submission['handle'] . '</span></a></div>
 						<p>' . Comment::showSyntax($submission['description']) . '</p>
 						<div class="extralinks"><a href="' . $submission['source_url'] . '">Link to Comment</a></div>
 					</div>
@@ -390,7 +388,7 @@ abstract class AppHashtag {
 					echo '
 						<div class="status-left"><a href="' . $social . '/' . $submission['handle'] . '"><img class="circimg" src="' . ProfilePic::image(1, "medium") . '" /></a></div>
 						<div class="status-right">
-							<div><a href="' . $social . '/' . $submission['handle'] . '"><span class="h4">' . $submission['display_name'] . '</span></a> <a href="' . $fastchat . '/' . $submission['handle'] . '"><span class="com-handle">@' . $submission['handle'] . '</span></a></div>
+							<div><a href="' . $social . '/' . $submission['handle'] . '"><span class="h4">' . $submission['display_name'] . '</span></a> <a href="' . $social . '/' . $submission['handle'] . '"><span class="com-handle">@' . $submission['handle'] . '</span></a></div>
 							<p>' . Comment::showSyntax($submission['description']) . '</p>
 						</div>';
 				}
@@ -419,7 +417,7 @@ abstract class AppHashtag {
 					echo '
 						<div class="status-left"><a href="' . $social . '/' . $submission['handle'] . '"><img class="circimg" src="' . ProfilePic::image(1, "medium") . '" /></a></div>
 						<div class="status-right">
-							<div><a href="' . $social . '/' . $submission['handle'] . '"><span class="h4">' . $submission['display_name'] . '</span></a> <a href="' . $fastchat . '/' . $submission['handle'] . '"><span class="com-handle">@' . $submission['handle'] . '</span></a></div>
+							<div><a href="' . $social . '/' . $submission['handle'] . '"><span class="h4">' . $submission['display_name'] . '</span></a> <a href="' . $social . '/' . $submission['handle'] . '"><span class="com-handle">@' . $submission['handle'] . '</span></a></div>
 							<p>' . Comment::showSyntax($submission['description']) . '</p>
 						</div>';
 				}
