@@ -12,6 +12,11 @@ if($activeHashtag)
 }
 
 
+// Dynamic Content Loader
+echo '
+<!-- Content gets dynamically shifted to this section -->
+<div id="dynamic-content-loader"></div>';
+
 
 // Prepare the Featured Widget Data
 $categories = array("articles", "people");
